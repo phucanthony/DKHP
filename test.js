@@ -12,6 +12,11 @@ const webDriver = require('selenium-webdriver');
 
 async function checkLogin(driver) {
 	return new Promise(async (resolve, reject) => {
+		try {
+			await driver.findElement(webDriver.By.css('a[href*="/Login/index')).click();
+		} catch (e) {
+
+		}
 		const url = await driver.getCurrentUrl();
 		await console.log(url);
 		if (url.indexOf('Login') !== -1) {
@@ -19,6 +24,8 @@ async function checkLogin(driver) {
 			await driver.findElement(webDriver.By.name('password')).sendKeys('Thutrang.');
 			await driver.findElement(webDriver.By.className('loginbox-submit')).click();
 			await driver.sleep(1000);
+			await driver.executeScript('window.scrollBy(0, 200)','');
+			await driver.sleep(200);
 			await driver.findElement(webDriver.By.id('DangKyHocPhan&KH')).click();
 			await driver.sleep(100);
 		}
