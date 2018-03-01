@@ -21,7 +21,7 @@ async function checkLogin(driver) {
 		await console.log(url);
 		if (url.indexOf('Login') !== -1) {
 			await driver.findElement(webDriver.By.name('username')).sendKeys('41.01.701.122');
-			await driver.findElement(webDriver.By.name('password')).sendKeys('Chaulen3');
+			await driver.findElement(webDriver.By.name('password')).sendKeys('Thutrang,');
 			await driver.findElement(webDriver.By.className('loginbox-submit')).click();
 			await driver.sleep(1000);
 			await driver.executeScript('window.scrollBy(0, 200)','');
@@ -32,7 +32,7 @@ async function checkLogin(driver) {
 		await driver.sleep(2000);
 		await driver.executeScript('window.scrollBy(0, 600)','');
 		await driver.sleep(100);
-		await driver.findElement(webDriver.By.css('a[href*="javascript:GetClassStudyUnit(\'1721ENGL1416\',\'Biên dịch thực hành')).click();
+		await driver.findElement(webDriver.By.css('a[href*="javascript:GetClassStudyUnit(\'1721ENGL1413\',\'Văn học Anh\'')).click();
 
 		await resolve();
 	});
@@ -48,14 +48,20 @@ async function registerListening6(driver, isRepeat = false, isSecondTime = false
 			const currentStudentClassOne = await tableList[64].getText();
 			const limitClassTwo = await tableList[72].getText();
 			const currentStudentClassTwo = await tableList[73].getText();
-			if (parseInt(limit.substr(limit.indexOf('-') + 1)) <= parseInt(currentStudent)) {
-				console.log('full', parseInt(limit.substr(limit.indexOf('-') + 1)) , parseInt(currentStudent));
-			} else {
-				console.log('not full', limit.substr(limit.indexOf('-') + 1) , currentStudent);
-				await driver.findElement(webDriver.By.id('1721ENGL141601$0.0$1721ENGL1416$$0')).click();
+			if (parseInt(limitClassOne.substr(limitClassOne.indexOf('-') + 1)) >= parseInt(currentStudentClassOne)) {
+				console.log('not full', parseInt(limitClassOne.substr(limitClassOne.indexOf('-') + 1)) , parseInt(currentStudentClassOne));
+				await driver.findElement(webDriver.By.id('1721ENGL141302$0.0$1721ENGL1413$$0')).click();
 				const buttonList = await driver.findElements(webDriver.By.css("input"));
 				await buttonList[5].click();
 				await driver.quit();
+			} else if (parseInt(limitClassTwo.substr(limitClassTwo.indexOf('-') + 1)) >= parseInt(currentStudentClassTwo)) {
+				console.log('not full', parseInt(limitClassTwo.substr(limitClassTwo.indexOf('-') + 1)) , parseInt(currentStudentClassTwo));
+				await driver.findElement(webDriver.By.id('1721ENGL141303$0.0$1721ENGL1413$$0')).click();
+				const buttonList = await driver.findElements(webDriver.By.css("input"));
+				await buttonList[5].click();
+				await driver.quit();
+			} else {
+				console.log('full', limit.substr(limit.indexOf('-') + 1) , currentStudent);
 			}
 		}
 		await registerListening6(driver, true, true);
